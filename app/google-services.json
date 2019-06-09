@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "806497244401",
+    "firebase_url": "https://appointmentdesk-2a477.firebaseio.com",
+    "project_id": "appointmentdesk-2a477",
+    "storage_bucket": "appointmentdesk-2a477.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806497244401:android:6d3de1f544a0f2d8",
+        "android_client_info": {
+          "package_name": "jp.dip.hirotann.appointmentdesk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "806497244401-2bi6bci68cb54sfomfbvit5bddtod7gp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "jp.dip.hirotann.appointmentdesk",
+            "certificate_hash": "f430eeb420b8296d830c8b657ba3e6bdd32611d2"
+          }
+        },
+        {
+          "client_id": "806497244401-6s0josaptvbur24t4kfi06tqjequj79e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDk7iuQnGjqxJeBs4PfUTMcGcrBBxCxJwg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "806497244401-6s0josaptvbur24t4kfi06tqjequj79e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
