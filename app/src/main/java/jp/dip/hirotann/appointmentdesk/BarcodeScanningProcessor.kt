@@ -11,18 +11,13 @@ import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetector
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
-import jp.dip.hirotann.appointmentdesk.common.CameraImageGraphic
 import jp.dip.hirotann.appointmentdesk.common.FrameMetadata
 import jp.dip.hirotann.appointmentdesk.common.GraphicOverlay
 import com.google.firebase.samples.apps.mlkit.kotlin.VisionProcessorBase
 import java.io.IOException
 import com.google.firebase.firestore.FirebaseFirestore
-import android.support.annotation.NonNull
-import android.text.format.DateFormat
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.firebase.firestore.DocumentReference
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
+import jp.dip.hirotann.appointmentdesk.common.CameraImageGraphic
 import java.util.*
 
 
@@ -80,6 +75,7 @@ class BarcodeScanningProcessor(contextin : Context) : VisionProcessorBase<List<F
 
                data.put("code" , it.rawValue.toString() )
                data.put("date" , Date() )
+               data.put("eventname" , AppReadList.instance.eventname )
                data.put("user" , user?.uid.toString())
 
                db.collection("root").document("record").collection(uid).document()

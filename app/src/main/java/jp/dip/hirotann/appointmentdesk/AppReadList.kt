@@ -4,6 +4,7 @@ import android.content.Context
 
 class AppReadList private constructor(context: Context) {
     var readlist = mutableSetOf<String>()
+    var eventname = ""
 
     companion object {
         private var _instance: AppReadList? = null

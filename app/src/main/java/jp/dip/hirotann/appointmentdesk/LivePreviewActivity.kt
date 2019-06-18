@@ -66,6 +66,8 @@ class LivePreviewActivity : AppCompatActivity(), OnRequestPermissionsResultCallb
         setContentView(R.layout.activity_live_preview)
 
         AppReadList.onCreateApplication(applicationContext)
+        val i = getIntent()
+        AppReadList.instance.eventname = i.getStringExtra("keyname")
 
         if (firePreview == null) {
             Log.d(TAG, "Preview is null")

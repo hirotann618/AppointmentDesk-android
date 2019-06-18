@@ -6,4 +6,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:padding="20dp"/>
+        android:padding="20dp" android:background="@drawable/text_border" android:id="@+id/item_text_view"/>

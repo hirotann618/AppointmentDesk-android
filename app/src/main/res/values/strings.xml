@@ -3,4 +3,5 @@
     <string name="login">Login</string>
     <string name="e_mail">E-mail</string>
     <string name="password">password</string>
+    <string name="selectevent">SelectEvent</string>
 </resources>

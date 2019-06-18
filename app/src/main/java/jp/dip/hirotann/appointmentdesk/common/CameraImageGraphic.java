@@ -3,6 +3,7 @@ package jp.dip.hirotann.appointmentdesk.common;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import jp.dip.hirotann.appointmentdesk.common.GraphicOverlay;
 
 /** Draw camera image to background. */
 public class CameraImageGraphic extends GraphicOverlay.Graphic {

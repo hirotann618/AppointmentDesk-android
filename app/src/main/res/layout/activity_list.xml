@@ -9,12 +9,22 @@
     <android.support.v7.widget.Toolbar
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
+            android:background="@color/colorPrimary"
             android:theme="?attr/actionBarTheme"
             android:minHeight="?attr/actionBarSize" app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/toolbar"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
     />
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/textView3"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
+            android:textSize="24sp" android:textAlignment="center"
+            android:textColor="#FFFFFF" android:layout_marginTop="8dp" android:layout_marginEnd="8dp"
+            android:text="受付状況"/>
     <android.support.v7.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"

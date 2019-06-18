@@ -5,12 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.R.attr.onClick
 
-
-
-class ListAdapter (private val myDataset: ArrayList<String>, val itemClick: (String) -> Unit) :
-    RecyclerView.Adapter<ListAdapter.ViewHolder>() {
+class SelectAdapter (private val myDataset: ArrayList<String>, val itemClick: (String) -> Unit) :
+    RecyclerView.Adapter<SelectAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -34,4 +31,5 @@ class ListAdapter (private val myDataset: ArrayList<String>, val itemClick: (Str
             this.itemView.setOnClickListener { itemClick(itemName) }
         }
     }
+
 }
