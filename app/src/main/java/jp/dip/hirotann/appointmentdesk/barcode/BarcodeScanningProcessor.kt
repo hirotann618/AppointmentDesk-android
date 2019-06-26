@@ -1,4 +1,4 @@
-package jp.dip.hirotann.appointmentdesk
+package jp.dip.hirotann.appointmentdesk.barcode
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -17,6 +17,7 @@ import com.google.firebase.samples.apps.mlkit.kotlin.VisionProcessorBase
 import java.io.IOException
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.auth.FirebaseAuth
+import jp.dip.hirotann.appointmentdesk.AppReadList
 import jp.dip.hirotann.appointmentdesk.common.CameraImageGraphic
 import java.util.*
 

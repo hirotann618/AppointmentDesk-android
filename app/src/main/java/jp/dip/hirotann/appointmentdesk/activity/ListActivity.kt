@@ -1,4 +1,4 @@
-package jp.dip.hirotann.appointmentdesk
+package jp.dip.hirotann.appointmentdesk.activity
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -7,7 +7,8 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
+import jp.dip.hirotann.appointmentdesk.ListAdapter
+import jp.dip.hirotann.appointmentdesk.R
 import kotlinx.android.synthetic.main.activity_list.*
 
 class ListActivity : AppCompatActivity()  {
@@ -52,7 +53,7 @@ class ListActivity : AppCompatActivity()  {
 
                     }
                     list_recycler_view.layoutManager = LinearLayoutManager(this)
-                    list_recycler_view.adapter = ListAdapter(textList){}
+                    list_recycler_view.adapter = ListAdapter(textList) {}
                 } else {
                     AlertDialog.Builder(this)
                         .setTitle("データの読み込みに失敗")

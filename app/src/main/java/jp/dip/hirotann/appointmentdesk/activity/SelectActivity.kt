@@ -1,4 +1,4 @@
-package jp.dip.hirotann.appointmentdesk
+package jp.dip.hirotann.appointmentdesk.activity
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -6,14 +6,9 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import kotlinx.android.synthetic.main.activity_list.*
 import kotlinx.android.synthetic.main.activity_select.*
-import android.content.DialogInterface
-import android.support.v7.app.AlertDialog
-import android.util.Log
-import android.widget.EditText
-import java.util.*
+import jp.dip.hirotann.appointmentdesk.R
+import jp.dip.hirotann.appointmentdesk.SelectAdapter
 import kotlin.collections.ArrayList
 
 
@@ -51,8 +46,9 @@ class SelectActivity : AppCompatActivity() {
                     }
                     select_recycler_view.layoutManager = LinearLayoutManager(this)
                     select_recycler_view.adapter = SelectAdapter(textList) {
-                        val intent = Intent(application, ListActivity::class.java)
-                        intent.putExtra("keyname",it)
+                        val intent =
+                            Intent(application, ListActivity::class.java)
+                        intent.putExtra("keyname", it)
                         startActivity(intent)
                     }
                 } else {

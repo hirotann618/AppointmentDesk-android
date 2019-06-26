@@ -1,4 +1,4 @@
-package jp.dip.hirotann.appointmentdesk
+package jp.dip.hirotann.appointmentdesk.activity
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -7,16 +7,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import java.sql.ClientInfoStatus
+import jp.dip.hirotann.appointmentdesk.R
 
 
 class MainActivity : AppCompatActivity() ,View.OnClickListener {
 
 
     private var auth: FirebaseAuth? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,15 +23,25 @@ class MainActivity : AppCompatActivity() ,View.OnClickListener {
         // Initialize Firebase Auth
         this.auth = FirebaseAuth.getInstance()
 
-
         val button: Button = findViewById(R.id.loginbutton) as Button
         button.setOnClickListener(this)
+
+        var newButton
     }
 
     override fun onClick(v: View?) {
 
         var email =  findViewById(R.id.emailText) as EditText
         var password = findViewById(R.id.passwordText) as EditText
+
+        if( email.text.isEmpty() || password.text.isEmpty() ){
+            AlertDialog.Builder(this)
+                .setTitle("入力エラー")
+                .setMessage("メールアドレスまたはパスワードを入力してください。")
+                .setPositiveButton("ok"){ dialog, which ->
+                }.show()
+            return
+        }
 
         this.signIn(email.text.toString(),password.text.toString())
     }

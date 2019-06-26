@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-package jp.dip.hirotann.appointmentdesk
+package jp.dip.hirotann.appointmentdesk.activity
 
 import android.content.Context
 import android.content.pm.PackageManager
@@ -28,6 +28,9 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.CompoundButton
 import com.google.android.gms.common.annotation.KeepName
 import com.google.firebase.ml.common.FirebaseMLException
+import jp.dip.hirotann.appointmentdesk.AppReadList
+import jp.dip.hirotann.appointmentdesk.barcode.BarcodeScanningProcessor
+import jp.dip.hirotann.appointmentdesk.R
 import jp.dip.hirotann.appointmentdesk.common.CameraSource
 import kotlinx.android.synthetic.main.activity_live_preview.facingSwitch
 import kotlinx.android.synthetic.main.activity_live_preview.fireFaceOverlay
@@ -134,7 +137,11 @@ class LivePreviewActivity : AppCompatActivity(), OnRequestPermissionsResultCallb
             when (model) {
                 BARCODE_DETECTION -> {
                     Log.i(TAG, "Using Barcode Detector Processor")
-                    cameraSource?.setMachineLearningFrameProcessor(BarcodeScanningProcessor(applicationContext))
+                    cameraSource?.setMachineLearningFrameProcessor(
+                        BarcodeScanningProcessor(
+                            applicationContext
+                        )
+                    )
                 }
                 else -> Log.e(TAG, "Unknown model: $model")
             }
@@ -185,7 +192,11 @@ class LivePreviewActivity : AppCompatActivity(), OnRequestPermissionsResultCallb
 
     private fun allPermissionsGranted(): Boolean {
         for (permission in requiredPermissions) {
-            if (!isPermissionGranted(this, permission!!)) {
+            if (!isPermissionGranted(
+                    this,
+                    permission!!
+                )
+            ) {
                 return false
             }
         }
@@ -195,14 +206,19 @@ class LivePreviewActivity : AppCompatActivity(), OnRequestPermissionsResultCallb
     private fun getRuntimePermissions() {
         val allNeededPermissions = arrayListOf<String>()
         for (permission in requiredPermissions) {
-            if (!isPermissionGranted(this, permission!!)) {
+            if (!isPermissionGranted(
+                    this,
+                    permission!!
+                )
+            ) {
                 allNeededPermissions.add(permission)
             }
         }
 
         if (!allNeededPermissions.isEmpty()) {
             ActivityCompat.requestPermissions(
-                this, allNeededPermissions.toTypedArray(), PERMISSION_REQUESTS
+                this, allNeededPermissions.toTypedArray(),
+                PERMISSION_REQUESTS
             )
         }
     }

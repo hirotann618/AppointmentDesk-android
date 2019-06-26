@@ -1,4 +1,4 @@
-package jp.dip.hirotann.appointmentdesk
+package jp.dip.hirotann.appointmentdesk.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -7,9 +7,8 @@ import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_create_event.*
-import android.widget.ProgressBar
-import android.support.v4.os.HandlerCompat.postDelayed
 import android.view.View
+import jp.dip.hirotann.appointmentdesk.R
 
 
 class CreateEventActivity : AppCompatActivity() {

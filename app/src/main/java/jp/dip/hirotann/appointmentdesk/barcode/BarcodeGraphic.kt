@@ -1,4 +1,4 @@
-package jp.dip.hirotann.appointmentdesk
+package jp.dip.hirotann.appointmentdesk.barcode
 
 import android.graphics.Canvas
 import android.graphics.Color

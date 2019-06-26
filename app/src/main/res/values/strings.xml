@@ -4,4 +4,5 @@
     <string name="e_mail">E-mail</string>
     <string name="password">password</string>
     <string name="selectevent">SelectEvent</string>
+    <string name="nowreg">新規登録</string>
 </resources>
