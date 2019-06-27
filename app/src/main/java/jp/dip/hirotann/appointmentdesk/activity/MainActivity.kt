@@ -13,7 +13,6 @@ import jp.dip.hirotann.appointmentdesk.R
 
 class MainActivity : AppCompatActivity() ,View.OnClickListener {
 
-
     private var auth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,10 +22,14 @@ class MainActivity : AppCompatActivity() ,View.OnClickListener {
         // Initialize Firebase Auth
         this.auth = FirebaseAuth.getInstance()
 
-        val button: Button = findViewById(R.id.loginbutton) as Button
+        val button: Button = findViewById(R.id.registrationbutton) as Button
         button.setOnClickListener(this)
 
-        var newButton
+        var newbutton : Button = findViewById(R.id.newbutton) as Button
+        newbutton.setOnClickListener {
+            val intent = Intent(application, NewActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onClick(v: View?) {
