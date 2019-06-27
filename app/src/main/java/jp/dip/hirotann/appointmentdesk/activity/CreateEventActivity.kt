@@ -1,5 +1,6 @@
 package jp.dip.hirotann.appointmentdesk.activity
 
+import android.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -9,6 +10,11 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_create_event.*
 import android.view.View
 import jp.dip.hirotann.appointmentdesk.R
+import kotlinx.android.synthetic.main.activity_new.*
+import com.google.firebase.firestore.CollectionReference
+
+
+
 
 
 class CreateEventActivity : AppCompatActivity() {
@@ -33,9 +39,20 @@ class CreateEventActivity : AppCompatActivity() {
                 val user = FirebaseAuth.getInstance().currentUser
                 val uid = user?.uid.toString()
 
+                if(eventEditText.text.isEmpty()){
+                    AlertDialog.Builder(this)
+                        .setTitle("入力エラー")
+                        .setMessage("イベント名を入力してください")
+                        .setPositiveButton("ok"){ dialog, which ->
+                            registrationbutton.isEnabled = true
+                        }.show()
+                    flg = true
+                    return@setOnClickListener
+                }
+
                 data.put("name", eventEditText.text.toString())
 
-                db.collection("root").document("event").collection(uid).document()
+                db.collection("root").document("event").collection(uid).document( eventEditText.text.toString() )
                     .set(data)
                     .addOnSuccessListener {
                         finish()

@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() ,View.OnClickListener {
         this.auth?.signInWithEmailAndPassword(email, password)
             ?.addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val intent = Intent(application, SelectActivity::class.java)
+                    val intent = Intent(application, MenuActivity::class.java)
                     startActivity(intent)
 
                 } else {

@@ -26,12 +26,13 @@ class NewActivity : AppCompatActivity() {
         // [END initialize_auth]
 
         registrationbutton.setOnClickListener{
-            enableWaitHandler(1000L,registrationbutton)
+            registrationbutton.isEnabled = false
             if(new_emailText.text.isEmpty() || new_passwordText.text.isEmpty()){
                 AlertDialog.Builder(this)
                     .setTitle("入力エラー")
                     .setMessage("メールアドレスまたはパスワードを入力してください。")
                     .setPositiveButton("ok"){ dialog, which ->
+                        registrationbutton.isEnabled = true
                     }.show()
 
             }else{
@@ -51,8 +52,9 @@ class NewActivity : AppCompatActivity() {
                         } else {
                             AlertDialog.Builder(this)
                                 .setTitle("登録エラー")
-                                .setMessage("登録エラーが発生しました。")
+                                .setMessage(task.exception?.message)
                                 .setPositiveButton("ok"){ dialog, which ->
+                                    registrationbutton.isEnabled = true
                                 }.show()
                         }
                     }
@@ -61,8 +63,4 @@ class NewActivity : AppCompatActivity() {
         }
     }
 
-    fun enableWaitHandler(stopTime: Long, view: View) {
-        view.setEnabled(false)
-        Handler().postDelayed(Runnable { view.setEnabled(true) }, stopTime)
-    }
 }
