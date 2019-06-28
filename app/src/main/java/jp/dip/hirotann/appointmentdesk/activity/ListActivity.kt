@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import jp.dip.hirotann.appointmentdesk.AppReadList
 import jp.dip.hirotann.appointmentdesk.ListAdapter
 import jp.dip.hirotann.appointmentdesk.R
 import kotlinx.android.synthetic.main.activity_list.*
@@ -23,6 +24,9 @@ class ListActivity : AppCompatActivity()  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
+        AppReadList.onCreateApplication(applicationContext)
+        AppReadList.instance.readlist.clear()
+
         val i = getIntent()
         this.eventname = i.getStringExtra("keyname")
 
@@ -37,9 +41,8 @@ class ListActivity : AppCompatActivity()  {
         }
     }
 
-    override fun onResume()
-    {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
 
         val user = FirebaseAuth.getInstance().currentUser
         val uid = user?.uid.toString()
@@ -49,8 +52,8 @@ class ListActivity : AppCompatActivity()  {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     for (document in task.result!!) {
-                        textList.add(document.getString("code").toString())
-
+                        textList.add(document.getString("name").toString())
+                        AppReadList.instance.readlist.add(document.getString("id").toString())
                     }
                     list_recycler_view.layoutManager = LinearLayoutManager(this)
                     list_recycler_view.adapter = ListAdapter(textList) {}
@@ -63,4 +66,5 @@ class ListActivity : AppCompatActivity()  {
                 }
             }
     }
+
 }

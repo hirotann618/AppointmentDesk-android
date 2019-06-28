@@ -1,11 +1,13 @@
 package jp.dip.hirotann.appointmentdesk.activity
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import jp.dip.hirotann.appointmentdesk.AppReadList
 import kotlinx.android.synthetic.main.activity_select.*
 import jp.dip.hirotann.appointmentdesk.R
 import jp.dip.hirotann.appointmentdesk.SelectAdapter
@@ -22,16 +24,16 @@ class SelectActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select)
 
+
+
         add_event_button.setOnClickListener { view ->
             val intent = Intent(application, CreateEventActivity::class.java)
             startActivity(intent)
         }
     }
 
-
-    override fun onResume()
-    {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
 
         val user = FirebaseAuth.getInstance().currentUser
         val uid = user?.uid.toString()
@@ -52,7 +54,15 @@ class SelectActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
                 } else {
+                    AlertDialog.Builder(this)
+                        .setTitle("データの読み込みに失敗")
+                        .setMessage("再度通信環境の良い場所で試してみてください。")
+                        .setPositiveButton("ok"){ dialog, which ->
+                        }.show()
                 }
             }
+
     }
+
+
 }

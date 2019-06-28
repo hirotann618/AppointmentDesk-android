@@ -20,6 +20,12 @@ import com.google.firebase.auth.FirebaseAuth
 import jp.dip.hirotann.appointmentdesk.AppReadList
 import jp.dip.hirotann.appointmentdesk.common.CameraImageGraphic
 import java.util.*
+import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.google.firebase.firestore.QuerySnapshot
+import android.support.annotation.NonNull
+import com.google.android.gms.tasks.OnCompleteListener
+
+
 
 
 /** Barcode Detector Demo.  */
@@ -73,17 +79,26 @@ class BarcodeScanningProcessor(contextin : Context) : VisionProcessorBase<List<F
 
                val user = FirebaseAuth.getInstance().currentUser
                val uid = user?.uid.toString()
+               val id = it.rawValue.toString()
 
-               data.put("code" , it.rawValue.toString() )
-               data.put("date" , Date() )
-               data.put("eventname" , AppReadList.instance.eventname )
-               data.put("user" , user?.uid.toString())
+               db.collection("root").document("user").collection("info").document(id)
+                   .get().addOnCompleteListener { it ->
+                       if(it.isSuccessful){
+                           val name  = it.result?.get("name") as String
 
-               db.collection("root").document("record").collection(uid).document()
-                   .set(data)
-                   .addOnSuccessListener { documentReference ->
+                           data.put("id" , id )
+                           data.put("name" , name )
+                           data.put("date" , Date() )
+                           data.put("eventname" , AppReadList.instance.eventname )
+
+                           db.collection("root").document("record").collection(uid).document()
+                               .set(data)
+                               .addOnSuccessListener { documentReference ->
+                               }
+                               .addOnFailureListener { e -> Log.w(TAG, "Error adding document", e) }
+                       }
                    }
-                   .addOnFailureListener { e -> Log.w(TAG, "Error adding document", e) }
+
            }
             AppReadList.instance.readlist.add(it.rawValue.toString())
             graphicOverlay.add(barcodeGraphic)

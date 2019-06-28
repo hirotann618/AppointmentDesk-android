@@ -68,7 +68,6 @@ class LivePreviewActivity : AppCompatActivity(), OnRequestPermissionsResultCallb
         Log.d(TAG, "onCreate")
         setContentView(R.layout.activity_live_preview)
 
-        AppReadList.onCreateApplication(applicationContext)
         val i = getIntent()
         AppReadList.instance.eventname = i.getStringExtra("keyname")
 
