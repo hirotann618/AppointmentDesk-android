@@ -16,5 +16,10 @@ class MenuActivity : AppCompatActivity() {
             val intent = Intent(application, SelectActivity::class.java)
             startActivity(intent)
         }
+
+        userbutton.setOnClickListener{
+            val intent = Intent(application, UserActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
