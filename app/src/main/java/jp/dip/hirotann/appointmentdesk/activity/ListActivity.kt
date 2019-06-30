@@ -5,6 +5,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import jp.dip.hirotann.appointmentdesk.AppReadList
@@ -27,6 +28,8 @@ class ListActivity : AppCompatActivity()  {
         AppReadList.onCreateApplication(applicationContext)
         AppReadList.instance.readlist.clear()
 
+        progressBar3.visibility = View.INVISIBLE
+
         val i = getIntent()
         this.eventname = i.getStringExtra("keyname")
 
@@ -44,6 +47,8 @@ class ListActivity : AppCompatActivity()  {
     override fun onStart() {
         super.onStart()
 
+        progressBar3.visibility = View.VISIBLE
+
         val user = FirebaseAuth.getInstance().currentUser
         val uid = user?.uid.toString()
         textList.clear()
@@ -57,11 +62,13 @@ class ListActivity : AppCompatActivity()  {
                     }
                     list_recycler_view.layoutManager = LinearLayoutManager(this)
                     list_recycler_view.adapter = ListAdapter(textList) {}
+                    progressBar3.visibility = View.INVISIBLE
                 } else {
                     AlertDialog.Builder(this)
                         .setTitle("データの読み込みに失敗")
                         .setMessage("再度通信環境の良い場所で試してみてください。")
                         .setPositiveButton("ok"){ dialog, which ->
+                            progressBar3.visibility = View.INVISIBLE
                         }.show()
                 }
             }

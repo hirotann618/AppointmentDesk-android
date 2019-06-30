@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.R.attr.onClick
 
-
-
 class ListAdapter (private val myDataset: ArrayList<String>, val itemClick: (String) -> Unit) :
     RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
@@ -32,6 +30,7 @@ class ListAdapter (private val myDataset: ArrayList<String>, val itemClick: (Str
         fun setUp(itemName: String) {
             this.textView.text = itemName
             this.itemView.setOnClickListener { itemClick(itemName) }
+
         }
     }
 }

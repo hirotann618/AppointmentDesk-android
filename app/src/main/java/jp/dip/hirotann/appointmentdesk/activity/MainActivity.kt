@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import com.google.firebase.auth.FirebaseAuth
 import jp.dip.hirotann.appointmentdesk.R
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() ,View.OnClickListener {
@@ -22,6 +23,8 @@ class MainActivity : AppCompatActivity() ,View.OnClickListener {
         // Initialize Firebase Auth
         this.auth = FirebaseAuth.getInstance()
 
+        progressBar.visibility = View.INVISIBLE
+
         val button: Button = findViewById(R.id.registrationbutton) as Button
         button.setOnClickListener(this)
 
@@ -34,6 +37,8 @@ class MainActivity : AppCompatActivity() ,View.OnClickListener {
 
     override fun onClick(v: View?) {
 
+        progressBar.visibility = View.VISIBLE
+
         var email =  findViewById(R.id.emailText) as EditText
         var password = findViewById(R.id.passwordText) as EditText
 
@@ -42,6 +47,7 @@ class MainActivity : AppCompatActivity() ,View.OnClickListener {
                 .setTitle("入力エラー")
                 .setMessage("メールアドレスまたはパスワードを入力してください。")
                 .setPositiveButton("ok"){ dialog, which ->
+                    progressBar.visibility = View.INVISIBLE
                 }.show()
             return
         }
@@ -54,14 +60,15 @@ class MainActivity : AppCompatActivity() ,View.OnClickListener {
         this.auth?.signInWithEmailAndPassword(email, password)
             ?.addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    progressBar.visibility = View.INVISIBLE
                     val intent = Intent(application, MenuActivity::class.java)
                     startActivity(intent)
-
                 } else {
                     AlertDialog.Builder(this)
                         .setTitle("ログインに失敗")
                         .setMessage("メールアドレスとパスワードを確認してください。")
                         .setPositiveButton("ok"){ dialog, which ->
+                            progressBar.visibility = View.INVISIBLE
                         }.show()
 
                 }
