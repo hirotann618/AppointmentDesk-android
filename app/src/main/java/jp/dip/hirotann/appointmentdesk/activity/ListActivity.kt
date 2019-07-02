@@ -5,7 +5,10 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.AdapterView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import jp.dip.hirotann.appointmentdesk.AppReadList
@@ -25,6 +28,7 @@ class ListActivity : AppCompatActivity()  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
+
         AppReadList.onCreateApplication(applicationContext)
         AppReadList.instance.readlist.clear()
 
@@ -33,7 +37,9 @@ class ListActivity : AppCompatActivity()  {
         val i = getIntent()
         this.eventname = i.getStringExtra("keyname")
 
-        this.textView3.text = this.eventname
+        supportActionBar!!.title = this.eventname
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
         fab.setOnClickListener { view ->
             // FABが押された時に処理
@@ -72,6 +78,34 @@ class ListActivity : AppCompatActivity()  {
                         }.show()
                 }
             }
+    }
+
+
+    //メニュー表示の為の関数
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        super.onCreateOptionsMenu(menu)
+
+        val inflater = menuInflater
+        //メニューのリソース選択
+        inflater.inflate(R.menu.item_menu, menu)
+        return true
+    }
+
+    //メニューのアイテムを押下した時の処理の関数
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        val info = item.getMenuInfo() as AdapterView.AdapterContextMenuInfo
+        when (item.getItemId()) {
+            //削除ボタンを押したとき
+            R.id.delete -> {
+                return true
+            }
+            else -> return super.onContextItemSelected(item)
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return super.onSupportNavigateUp()
     }
 
 }

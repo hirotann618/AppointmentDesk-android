@@ -29,6 +29,9 @@ class SelectActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select)
 
+        supportActionBar!!.title = "イベント選択"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         progressBar5.visibility = View.INVISIBLE
 
         add_event_button.setOnClickListener { view ->
@@ -71,6 +74,11 @@ class SelectActivity : AppCompatActivity() {
                 }
             }
 
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return super.onSupportNavigateUp()
     }
 
 

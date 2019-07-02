@@ -12,6 +12,9 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
+        supportActionBar!!.title = "メニュー"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         ownbutton.setOnClickListener {
             val intent = Intent(application, SelectActivity::class.java)
             startActivity(intent)
@@ -22,4 +25,10 @@ class MenuActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return super.onSupportNavigateUp()
+    }
+
 }

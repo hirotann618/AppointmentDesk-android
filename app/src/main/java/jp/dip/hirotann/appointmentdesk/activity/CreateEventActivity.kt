@@ -27,6 +27,9 @@ class CreateEventActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_event)
 
+        supportActionBar!!.title = "イベント作成"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         progress_bar.setVisibility(android.widget.ProgressBar.INVISIBLE)
 
         createbutton.setOnClickListener {
@@ -67,6 +70,11 @@ class CreateEventActivity : AppCompatActivity() {
                     }
             }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return super.onSupportNavigateUp()
     }
 
     fun enableWaitHandler(stopTime: Long, view: View) {

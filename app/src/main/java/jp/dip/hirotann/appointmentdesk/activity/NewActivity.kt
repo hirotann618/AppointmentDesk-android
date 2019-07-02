@@ -21,6 +21,10 @@ class NewActivity : AppCompatActivity() {
 
         progressBar2.visibility = View.INVISIBLE
 
+        // Set the action bar title, subtitle and elevation
+        supportActionBar!!.title = "ユーザー作成"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         // [START initialize_auth]
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
@@ -80,6 +84,11 @@ class NewActivity : AppCompatActivity() {
                 // [END create_user_with_email]
             }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return super.onSupportNavigateUp()
     }
 
 }

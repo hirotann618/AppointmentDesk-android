@@ -21,6 +21,9 @@ class UserActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
 
+        supportActionBar!!.title = "マイバーコード"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         auth = FirebaseAuth.getInstance()
 
         val user = this.auth?.currentUser
@@ -44,6 +47,11 @@ class UserActivity : AppCompatActivity() {
             throw AndroidRuntimeException("Barcode Error.", e)
         }
 
-
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return super.onSupportNavigateUp()
+    }
+
 }
