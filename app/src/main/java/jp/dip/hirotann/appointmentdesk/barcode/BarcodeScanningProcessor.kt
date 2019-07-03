@@ -2,6 +2,7 @@ package jp.dip.hirotann.appointmentdesk.barcode
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.VibrationEffect
 import android.os.VibrationEffect.DEFAULT_AMPLITUDE
 import android.os.Vibrator
@@ -69,7 +70,7 @@ class BarcodeScanningProcessor(contextin : Context) : VisionProcessorBase<List<F
         }
 
         barcodes.forEach {
-            val barcodeGraphic = BarcodeGraphic(graphicOverlay, it)
+            var barcodeGraphic = BarcodeGraphic(graphicOverlay, it , Color.WHITE)
 
            if(! AppReadList.instance.readlist.contains(it.rawValue.toString()) ){
                val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
@@ -99,6 +100,8 @@ class BarcodeScanningProcessor(contextin : Context) : VisionProcessorBase<List<F
                    }
                }
 
+           }else{
+               barcodeGraphic = BarcodeGraphic(graphicOverlay, it , Color.GREEN)
            }
             AppReadList.instance.readlist.add(it.rawValue.toString())
             graphicOverlay.add(barcodeGraphic)

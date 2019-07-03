@@ -7,8 +7,10 @@ import android.graphics.RectF
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode
 import jp.dip.hirotann.appointmentdesk.common.GraphicOverlay
 
-class BarcodeGraphic(overlay: GraphicOverlay, private val barcode: FirebaseVisionBarcode) :
+class BarcodeGraphic(overlay: GraphicOverlay, private val barcode: FirebaseVisionBarcode,text_color: Int) :
     GraphicOverlay.Graphic(overlay) {
+
+    private var TEXT_COLOR = text_color
 
     private var rectPaint = Paint().apply {
         color = TEXT_COLOR
@@ -40,7 +42,6 @@ class BarcodeGraphic(overlay: GraphicOverlay, private val barcode: FirebaseVisio
     }
 
     companion object {
-        private const val TEXT_COLOR = Color.WHITE
         private const val TEXT_SIZE = 54.0f
         private const val STROKE_WIDTH = 4.0f
     }
