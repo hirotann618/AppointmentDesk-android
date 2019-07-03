@@ -17,8 +17,6 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 
 
-
-
 class SelectActivity : AppCompatActivity() {
 
     var textList: ArrayList<String> = ArrayList()

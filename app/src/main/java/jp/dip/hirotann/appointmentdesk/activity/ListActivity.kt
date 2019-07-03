@@ -1,6 +1,7 @@
 package jp.dip.hirotann.appointmentdesk.activity
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -94,9 +95,26 @@ class ListActivity : AppCompatActivity()  {
     //メニューのアイテムを押下した時の処理の関数
     override fun onContextItemSelected(item: MenuItem): Boolean {
         val info = item.getMenuInfo() as AdapterView.AdapterContextMenuInfo
+        val user = FirebaseAuth.getInstance().currentUser
+        val uid = user?.uid.toString()
         when (item.getItemId()) {
             //削除ボタンを押したとき
             R.id.delete -> {
+                // ダイアログを作成して表示
+                AlertDialog.Builder(this).apply {
+                    setMessage("イベントデータをすべて削除してよろしいでしょうか")
+                    setPositiveButton("OK", DialogInterface.OnClickListener {  _, _ ->
+                        db.collection("root").document("record").collection(uid).whereEqualTo("eventname" , eventname).get().addOnCompleteListener {
+                            it.result?.forEach {
+                                db.collection("root").document("record").collection(uid).document( it.id ).delete()
+                                finish()
+                            }
+                        }
+                    })
+                    setNegativeButton("Cancel", null)
+                    show()
+                }
+
                 return true
             }
             else -> return super.onContextItemSelected(item)
