@@ -81,10 +81,10 @@ class BarcodeScanningProcessor(contextin : Context) : VisionProcessorBase<List<F
                val uid = user?.uid.toString()
                val id = it.rawValue.toString()
 
-               db.collection("root").document("user").collection("info").document(id)
-                   .get().addOnCompleteListener { it ->
-                       if(it.isSuccessful){
-                           val name  = it.result?.get("name") as String
+               db.collection("root").document("user").collection("info").whereEqualTo("id" , id).get().addOnCompleteListener {
+                   it.result?.forEach {
+
+                           val name  = it.getString("name") as String
 
                            data.put("id" , id )
                            data.put("name" , name )
@@ -96,8 +96,8 @@ class BarcodeScanningProcessor(contextin : Context) : VisionProcessorBase<List<F
                                .addOnSuccessListener { documentReference ->
                                }
                                .addOnFailureListener { e -> Log.w(TAG, "Error adding document", e) }
-                       }
                    }
+               }
 
            }
             AppReadList.instance.readlist.add(it.rawValue.toString())

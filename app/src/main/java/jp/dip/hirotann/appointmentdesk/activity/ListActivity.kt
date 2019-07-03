@@ -93,8 +93,7 @@ class ListActivity : AppCompatActivity()  {
     }
 
     //メニューのアイテムを押下した時の処理の関数
-    override fun onContextItemSelected(item: MenuItem): Boolean {
-        val info = item.getMenuInfo() as AdapterView.AdapterContextMenuInfo
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val user = FirebaseAuth.getInstance().currentUser
         val uid = user?.uid.toString()
         when (item.getItemId()) {
@@ -104,11 +103,14 @@ class ListActivity : AppCompatActivity()  {
                 AlertDialog.Builder(this).apply {
                     setMessage("イベントデータをすべて削除してよろしいでしょうか")
                     setPositiveButton("OK", DialogInterface.OnClickListener {  _, _ ->
+                        progressBar3.visibility = View.VISIBLE
                         db.collection("root").document("record").collection(uid).whereEqualTo("eventname" , eventname).get().addOnCompleteListener {
                             it.result?.forEach {
                                 db.collection("root").document("record").collection(uid).document( it.id ).delete()
-                                finish()
                             }
+                            db.collection("root").document("event").collection(uid).document(  eventname ).delete()
+                            progressBar3.visibility = View.INVISIBLE
+                            finish()
                         }
                     })
                     setNegativeButton("Cancel", null)
@@ -117,7 +119,7 @@ class ListActivity : AppCompatActivity()  {
 
                 return true
             }
-            else -> return super.onContextItemSelected(item)
+            else -> return super.onOptionsItemSelected(item)
         }
     }
 
