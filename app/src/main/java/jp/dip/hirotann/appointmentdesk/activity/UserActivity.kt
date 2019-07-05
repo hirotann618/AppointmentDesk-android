@@ -7,15 +7,22 @@ import jp.dip.hirotann.appointmentdesk.R
 import android.util.AndroidRuntimeException
 import com.google.zxing.WriterException
 import android.graphics.Bitmap
+import android.util.Log
+import android.widget.TextView
+import com.google.firebase.firestore.FirebaseFirestore
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.google.zxing.BarcodeFormat
+import jp.dip.hirotann.appointmentdesk.AppReadList
+import jp.dip.hirotann.appointmentdesk.barcode.BarcodeScanningProcessor
 import kotlinx.android.synthetic.main.activity_user.*
+import java.util.*
 
 
 class UserActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
+    var db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +40,14 @@ class UserActivity : AppCompatActivity() {
 
         //QRコード画像の大きさを指定(pixel)
         val size = 500
+
+        db.collection("root").document("user").collection("info").whereEqualTo("id" , data).get().addOnCompleteListener {
+            it.result?.forEach {
+                val name = it.getString("name") as String
+                this.editNameText.setText(name, TextView.BufferType.NORMAL)
+
+            }
+        }
 
 
         try {
